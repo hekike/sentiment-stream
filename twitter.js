@@ -5,16 +5,10 @@ var
   ntwitter = require('ntwitter'),
   stream = require('stream'),
   Readable = stream.Readable,
-
-  twit = new ntwitter({
-    consumer_key: 'consumer_key',
-    consumer_secret: 'consumer_secret',
-    access_token_key: 'access_token_key',
-    access_token_secret: 'access_token_secret'
-  }),
-
   tweetStream = new Readable(),
+  twit,
 
+  // fns
   init;
 
 tweetStream.on('error', function (err) {
@@ -23,9 +17,7 @@ tweetStream.on('error', function (err) {
 
 tweetStream._read = function () {};
 
-
 init = function () {
-
   twit.stream('statuses/filter', {
     locations: '-122.75,36.8,-121.75,37.8,-74,40,-73,41'
   }, function (stream) {
@@ -33,7 +25,18 @@ init = function () {
       tweetStream.push(data.text);
     });
   });
+};
 
+exports.config = function (config) {
+
+  twit = new ntwitter({
+    consumer_key: config.consumerKey,
+    consumer_secret: config.consumerSecret,
+    access_token_key: config.accessTokenKey,
+    access_token_secret: config.accessTokenSecret
+  });
+
+  init();
 };
 
 exports.getStream = function () {
@@ -41,11 +44,9 @@ exports.getStream = function () {
 };
 
 
-exports.setNTwitter = function (mod) {
-  twit = new mod();
+exports.setNTwitter = function (Mod) {
+  twit = new Mod();
 
   init();
 };
 
-
-init();

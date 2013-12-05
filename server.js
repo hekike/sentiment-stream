@@ -3,38 +3,21 @@
 'use strict';
 
 var
-  sentiment = require('sentiment'),
-  through = require('through'),
+  nconf = require('nconf'),
+  twitter = require('./twitter'),
+  sentimentStream = require('./sentiment');
 
-  tweetStream = require('./twitter').getStream(),
+// Config
+nconf.file('./config.json');
 
-  tweeThrough;
+twitter.config({
+  consumerKey: nconf.get('twitter:consumerKey'),
+  consumerSecret: nconf.get('twitter:consumerSecret'),
+  accessTokenKey: nconf.get('twitter:accessTokenKey'),
+  accessTokenSecret: nconf.get('twitter:accessTokenSecret')
+});
 
-
-tweeThrough = through(function write(data) {
-
-    var
-      _this = this,
-      text = data.toString();
-
-    sentiment(text, function (err, result) {
-
-      if(err) {
-        return console.error(err);
-      }
-
-      _this.queue(JSON.stringify({
-        text: text,
-        score: result.score
-      }));
-    });
-  },
-  function end () {
-    this.queue(null);
-  });
-
-
-tweetStream.pipe(process.stdout);
-tweetStream
-  .pipe(tweeThrough)
+// Pipe it
+twitter.getStream()
+  .pipe(sentimentStream)
   .pipe(process.stdout);
