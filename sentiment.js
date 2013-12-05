@@ -22,8 +22,8 @@ th = through(function write(data) {
 
       out = JSON.stringify(
         {
-          text: text,
-          score: result.score
+          score: result.score,
+          text: text
         }
       );
 
