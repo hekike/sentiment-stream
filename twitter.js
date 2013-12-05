@@ -9,7 +9,7 @@ var
   twit = new ntwitter({
     consumer_key: 'consumer_key',
     consumer_secret: 'consumer_secret',
-    access_token_key: 'access_token_key-lZG4Y0aa8djEFVa4QOfXy9kne542OyHbLXxF3xGh',
+    access_token_key: 'access_token_key',
     access_token_secret: 'access_token_secret'
   }),
 
