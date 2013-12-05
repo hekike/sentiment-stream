@@ -7,10 +7,10 @@ var
   Readable = stream.Readable,
 
   twit = new ntwitter({
-    consumer_key: 'JdygRSL10kWO9aftuNN3w',
-    consumer_secret: '4cXcVhEaeG9oQ7PgIirNlLRWUIFJvi6zRUMXbBsAWA',
-    access_token_key: '741502640-lZG4Y0aa8djEFVa4QOfXy9kne542OyHbLXxF3xGh',
-    access_token_secret: 'KBms9kAoY9MPGlvt45Njv6pxO5FsZkDcWTbf4mrDccdsO'
+    consumer_key: 'consumer_key',
+    consumer_secret: 'consumer_secret',
+    access_token_key: 'access_token_key-lZG4Y0aa8djEFVa4QOfXy9kne542OyHbLXxF3xGh',
+    access_token_secret: 'access_token_secret'
   }),
 
   tweetStream = new Readable(),
