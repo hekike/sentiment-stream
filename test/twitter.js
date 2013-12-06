@@ -5,7 +5,7 @@ var
   stream = require('stream'),
   Readable = stream.Readable,
 
-  twitter = require('../twitter');
+  twitter = require('../lib/twitter');
 
 describe('twitter module', function () {
 

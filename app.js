@@ -4,8 +4,8 @@
 
 var
   nconf = require('nconf'),
-  twitter = require('./twitter'),
-  sentimentStream = require('./sentiment');
+  twitter = require('./lib/twitter'),
+  sentimentStream = require('./lib/sentiment');
 
 // Config
 nconf.file('./config.json');
