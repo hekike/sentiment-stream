@@ -10,6 +10,7 @@ var
     this._counter = 0;
     this._emitter = new events.EventEmitter();
 
+    // Generate sample text
     setInterval(function () {
       _this.mock.apply(_this);
     }, 5);

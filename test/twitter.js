@@ -2,34 +2,25 @@
 
 var
   expect = require('chai').expect,
-  stream = require('stream'),
-  Readable = stream.Readable,
 
-  twitter = require('../lib/twitter');
+  Twitter = require('../lib/twitter'),
+  twitter = new Twitter();
 
 describe('twitter module', function () {
 
-  var stream;
-
-  twitter.setNTwitter(require('./mock/ntwitter'));
-
-
-  beforeEach(function () {
-    stream = twitter.getStream();
-  });
-
+  twitter.mockNTwitter(require('./mock/ntwitter'));
 
   it('should get a Readable stream', function () {
-    expect(stream).to.be.an.instanceof(Readable);
+    expect(twitter).to.be.an.instanceof(Twitter);
   });
 
   it('should keep alive', function (done) {
 
-    stream.on('data', function (buffer) {
+    twitter.on('data', function (buffer) {
       var
         text = buffer.toString();
 
-      expect(text).to.be.equal('Text: 0');
+      expect(text).to.match(/Text: [0-9]{1}$/);
       done();
     });
 
