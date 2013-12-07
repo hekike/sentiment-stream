@@ -2,13 +2,12 @@
 
 var
   expect = require('chai').expect,
+  Twitter = require('../lib/twitter');
 
-  Twitter = require('../lib/twitter'),
-  twitter = new Twitter();
+Twitter.mockNTwitter(require('./mock/ntwitter'));
 
 describe('twitter module', function () {
-
-  twitter.mockNTwitter(require('./mock/ntwitter'));
+  var twitter = new Twitter();
 
   it('should get a Readable stream', function () {
     expect(twitter).to.be.an.instanceof(Twitter);
